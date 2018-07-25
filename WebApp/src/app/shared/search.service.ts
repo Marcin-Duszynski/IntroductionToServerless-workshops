@@ -1,6 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 import { Injectable } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { SearchResult } from './model/searchResult';
@@ -21,8 +21,19 @@ export class SearchService {
     if (!query.trim()) {
       return of(new SearchResult());
     }
+  
+    console.log(JSON.stringify({
+      msg: 'token',
+      value: localStorage.getItem('token'),
+    }));
 
-    return this.http.get<SearchResult>(`${searchUrl}/${query}`).pipe(
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('token'),
+      })
+    };
+
+    return this.http.get<SearchResult>(`${searchUrl}/${query}`, httpOptions).pipe(
       tap(items => console.debug(items)),
       catchError(this.handleError<SearchResult>('search', new SearchResult()))
     )

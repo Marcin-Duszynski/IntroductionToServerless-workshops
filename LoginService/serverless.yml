@@ -1,0 +1,30 @@
+service: LoginServerlessService
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${file(../globalSettings.yml):stage}
+  region: ${file(../globalSettings.yml):region}
+
+resources:  
+  Resources:
+    UserPool:
+      Type: AWS::Cognito::UserPool
+      Properties:
+        AdminCreateUserConfig:
+          AllowAdminCreateUserOnly: false
+        UserPoolName: serverlessIntroUserPool-${self:provider.stage}
+        AutoVerifiedAttributes:
+          - 'email'
+        Schema:
+          - AttributeDataType: 'String'
+            Name: email
+            Required: false
+
+    UserPoolClient:
+      Type: "AWS::Cognito::UserPoolClient"
+      Properties:
+        ClientName: serverlessIntroUserPoolClient-${self:provider.stage}
+        GenerateSecret: false
+        UserPoolId:
+          Ref: UserPool

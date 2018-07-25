@@ -1,3 +1,4 @@
 stage: marcind2
 region: eu-west-1
 cloudFrontDisc: https://d3hmxde60sm12x.cloudfront.net
+cognitoUserPoolArn: arn:aws:cognito-idp:eu-west-1:425110442143:userpool/eu-west-1_9eylCnwuA

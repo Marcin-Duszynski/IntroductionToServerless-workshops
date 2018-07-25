@@ -1,4 +1,4 @@
 {
   "searchUrl": "https://dg12ptanhd.execute-api.eu-west-1.amazonaws.com/marcind2/search",
-  "loginUrl": "https://example.com"
+  "loginUrl": "https://kainos-marcind2.auth.eu-west-1.amazoncognito.com/login?response_type=token&client_id=4tmven2q3as7rbk7hfi51nc6jp&redirect_uri=https://d3hmxde60sm12x.cloudfront.net/search/"
 }
