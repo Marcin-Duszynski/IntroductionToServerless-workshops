@@ -1,0 +1,27 @@
+.searchItem {
+  width: 250px;
+  padding: 20px;
+}
+
+.searchFormField {
+  margin: 10px auto 10px auto;
+  width:90%;
+  display: table;
+}
+
+#noSearchResultsMessage {
+  margin: auto;
+  display: table;
+}
+
+mat-card-header {
+  height: 120px;
+}
+
+mat-card {
+  height: 350px;
+}
+
+mat-card img{
+  height: 200px;
+}

@@ -1,0 +1,26 @@
+service: serverlessWebApp
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${file(../globalSettings.yml):stage}
+  region: ${file(../globalSettings.yml):region}
+
+plugins:
+  - serverless-s3-sync
+
+resources:  
+  Resources:
+    StaticSite:
+      Type: AWS::S3::Bucket
+      Properties:
+        AccessControl: PublicRead
+        BucketName: kainosserverlessintro-${self:provider.stage}
+        WebsiteConfiguration:
+          IndexDocument: index.html
+
+custom:
+  s3Sync:
+    - bucketName: ${self:resources.Resources.StaticSite.Properties.BucketName}
+      acl: public-read
+      localDir: /dist/serverlessIntroduction
