@@ -1,0 +1,37 @@
+mat-toolbar {
+  box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.bottombar .mat-toolbar-single-row {
+  background: black;
+  height: 100px;
+  margin-top: 20px;
+}
+
+.topbar .mat-toolbar-single-row {
+  margin-bottom: 20px;
+}
+
+.all-wrap {
+  min-height: 100vh;
+}
+ 
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+ 
+.content {
+  flex: 1;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+main > *:not(router-outlet) {
+  flex: 1;
+  display: block;
+}
