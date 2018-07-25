@@ -1,0 +1,12 @@
+{
+  "name": "serverlessIntroductionTestData",
+  "version": "0.0.0",
+  "scripts": {
+    "deploy": "node dynamodb_upload.js"
+  },
+  "private": true,
+  "dependencies": {
+    "aws-sdk": "^2.275.1"
+  },
+  "devDependencies": {}
+}

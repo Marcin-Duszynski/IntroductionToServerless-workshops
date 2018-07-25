@@ -1,4 +1,4 @@
 {
-  "searchUrl": "https://example.com",
+  "searchUrl": "https://dg12ptanhd.execute-api.eu-west-1.amazonaws.com/marcind2/search",
   "loginUrl": "https://example.com"
 }

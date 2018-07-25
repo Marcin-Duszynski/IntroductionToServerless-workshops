@@ -1,0 +1,13 @@
+{
+  "name": "serverlessIntroductionBackend",
+  "version": "0.0.0",
+  "scripts": {
+    "apply": "npx serverless deploy",
+    "destroy": "npx serverless remove"
+  },
+  "private": true,
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
