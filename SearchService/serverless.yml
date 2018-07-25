@@ -1,0 +1,89 @@
+service: searchServerlessService
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${file(../globalSettings.yml):stage}
+  region: ${file(../globalSettings.yml):region}
+
+plugins:
+  - serverless-iam-roles-per-function
+  - serverless-dynamodb-autoscaling
+  - serverless-aws-documentation
+  - serverless-reqvalidator-plugin
+
+functions:
+
+  search:
+    name: search-${self:provider.stage}
+    handler: searchDynamoDb.handler
+    memorySize: 256
+    environment:
+      STORE_DB_NAME: ${self:resources.Resources.ItemsStore.Properties.TableName}
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:GetItem
+          - dynamodb:Scan
+        Resource: arn:aws:dynamodb:*:*:table/${self:resources.Resources.ItemsStore.Properties.TableName}
+    tags:
+      owner: ${self:provider.stage}
+    events:
+      - http:
+          path: /search/{query}
+          method: get
+          cors: 
+            origins:
+              - '${file(../globalSettings.yml):cloudFrontDisc}'
+          integration: lambda
+          reqValidatorName: searchrRequestValidator
+          request:
+            parameters:
+              paths:
+                query: true
+            passThrough: NEVER
+            template:
+              application/json: '{ "query" : "$input.params(''query'')" }'
+
+resources:  
+  Resources:
+
+    searchrRequestValidator:
+      Type: "AWS::ApiGateway::RequestValidator"
+      Properties:
+        Name: 'searchrRequestValidator'
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        ValidateRequestBody: true
+        ValidateRequestParameters: true
+
+    SearchLogGroup:
+      Type: AWS::Logs::LogGroup
+      Properties:
+        RetentionInDays: "7"
+
+    ItemsStore:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ItemsStore-${self:provider.stage}
+        AttributeDefinitions:
+          - AttributeName: objectID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: objectID
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
+custom:
+  capacities:
+    - table: ItemsStore
+      read:
+        minimum: 1
+        maximum: 20
+        usage: 0.75
+      write:
+        minimum: 1
+        maximum: 5
+        usage: 0.75
