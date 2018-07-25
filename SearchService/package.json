@@ -6,7 +6,12 @@
     "destroy": "npx serverless remove"
   },
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "algoliasearch": "^3.29.0",
+    "jsonwebtoken": "^8.3.0",
+    "jwk-to-pem": "^2.0.0",
+    "request": "^2.87.0"
+  },
   "devDependencies": {
     "serverless-dynamodb-autoscaling": "^0.6.2",
     "serverless-iam-roles-per-function": "^1.0.1",

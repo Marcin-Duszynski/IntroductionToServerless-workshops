@@ -5,6 +5,9 @@ provider:
   runtime: nodejs8.10
   stage: ${file(../globalSettings.yml):stage}
   region: ${file(../globalSettings.yml):region}
+  environment:
+    ALGOLIA_APP_ID: ${env:ALGOLIA_APP_ID}
+    ALGOLIA_INDEX_NAME: ServerlessIntro
 
 plugins:
   - serverless-iam-roles-per-function
@@ -14,12 +17,38 @@ plugins:
 
 functions:
 
+  index:
+    name: index-${self:provider.stage}
+    handler: index.handler
+    memorySize: 128
+    environment:
+      ALGOLIA_API_KEY: ${env:ALGOLIA_API_KEY_INDEX}
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - "dynamodb:GetRecords"
+          - "dynamodb:GetShardIterator"
+          - "dynamodb:DescribeStream"
+          - "dynamodb:ListStreams"
+        Resource: arn:aws:dynamodb:*:*:table/${self:resources.Resources.ItemsStore.Properties.TableName}/stream/*
+    tags:
+      owner: ${self:provider.stage}
+    events:
+      - stream:
+          type: dynamodb
+          batchSize: 100
+          arn:
+            Fn::GetAtt:
+              - ItemsStore
+              - StreamArn
+
   search:
     name: search-${self:provider.stage}
-    handler: searchDynamoDb.handler
+    handler: searchAlgolia.handler
     memorySize: 256
     environment:
       STORE_DB_NAME: ${self:resources.Resources.ItemsStore.Properties.TableName}
+      ALGOLIA_API_KEY: ${env:ALGOLIA_API_KEY_SEARCH
     iamRoleStatements:
       - Effect: Allow
         Action:
@@ -62,6 +91,11 @@ resources:
       Properties:
         RetentionInDays: "7"
 
+    IndexLogGroup:
+      Type: AWS::Logs::LogGroup
+      Properties:
+        RetentionInDays: "7"
+
     ItemsStore:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -75,6 +109,8 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
+        StreamSpecification:
+          StreamViewType: NEW_IMAGE
 
 custom:
   capacities:
