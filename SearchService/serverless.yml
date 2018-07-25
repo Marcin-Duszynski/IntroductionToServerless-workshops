@@ -61,6 +61,11 @@ functions:
       - http:
           path: /search/{query}
           method: get
+          authorizer:
+            arn: ${file(../globalSettings.yml):cognitoUserPoolArn}
+            claims:
+              - email
+              - openid
           cors: 
             origins:
               - '${file(../globalSettings.yml):cloudFrontDisc}'
