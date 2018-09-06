@@ -1,6 +1,8 @@
 # Step 0 - Init
 
-Plase install [Visual Studio Code](https://code.visualstudio.com/ "Visual Studio Code") or other code editor of your choice.
+- Plase install [Visual Studio Code](https://code.visualstudio.com/ "Visual Studio Code") or other code editor of your choice.
+- AWS CLI
+- Serverless framework
 
 Login to [the AWS Console](https://signin.aws.amazon.com/oauth?redirect_uri=https%3A%2F%2Fconsole.aws.amazon.com%2Fconsole%2Fhome%3Fstate%3DhashArgs%2523%26isauthcode%3Dtrue&client_id=arn%3Aaws%3Aiam%3A%3A015428540659%3Auser%2Fhomepage&response_type=code&iam_user=true&account=kainos-gov-rd "the AWS Console") and type provided user name and password.
 
