@@ -1,7 +1,3 @@
-**Table of Contents**
-
-[TOC]
-
 # Step 0 - Init
 
 Plase install [Visual Studio Code](https://code.visualstudio.com/ "Visual Studio Code") or other code editor of your choice.
@@ -41,7 +37,7 @@ export ALGOLIA_API_KEY_SEARCH=temporarilyBlank
 ```
 
 # Step 1 - Simple search
-##Our first task is to deploy web application to the S3.
+## Our first task is to deploy web application to the S3.
 
 Switch to the branch **step1-webApp**
 ```bash
@@ -87,7 +83,7 @@ serverless deploy
 Deployment script is using serverless-s3-sync plugin to push our site to the S3
 https://www.npmjs.com/package/serverless-s3-sync
 
-##CloudFront
+## CloudFront
 Create new folder **Infrastructure**
 and serverless.yml file inside
 
@@ -162,7 +158,7 @@ We need to pass created cloud front distribution name to the app globalSettings.
 cloudFrontDisc: https://example123.cloudfront.net
 ```
 
-##Search backend
+## Search backend
 Create folder **SearchService**
 then file package.json and paste:
 ```yaml
@@ -185,7 +181,7 @@ then file package.json and paste:
 }
 ```
 
-###Create AWS Lambda function
+### Create AWS Lambda function
 Add file searchDynamoDb.js and paste:
 ```javascript
 const AWS = require('aws-sdk');
@@ -2153,11 +2149,11 @@ Update serverless.yml
  - http:
           path: /search/{query}
           method: get
-**          authorizer:
+          authorizer:
             arn: ${file(../globalSettings.yml):cognitoUserPoolArn}
             claims:
               - email
-              - openid**
+              - openid
 ```
 
 Update WebApp/src/app/appConfig.json and add loginUrl.
