@@ -642,7 +642,7 @@ Go to SearchService folder and execute
 sls deploy
 ```
 
-# Step 3 - Application Security
+# Bonus Step (Home work) - Application Security
 ## Create Login service
 Create LoginService folder and serverless.yml inside. Then paste:
 ```javascript
