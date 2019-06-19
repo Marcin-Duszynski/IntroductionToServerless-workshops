@@ -12,6 +12,7 @@ Final application architecture:
 - Install Azure CLI (MacOs -> brew update && brew install azure-cli) [Windows](https://docs.microsoft.com/pl-pl/cli/azure/install-azure-cli-windows?view=azure-cli-latest)
 - Install The Serverless Framework (npm install -g serverless)
 - Install Git (https://git-scm.com/downloads)
+- Clone this repository
 
 # Part 1 - AWS
 [Serverless on AWS](aws.md)
