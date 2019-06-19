@@ -9,10 +9,9 @@ Final application architecture:
 - Plase install [Visual Studio Code](https://code.visualstudio.com/ "Visual Studio Code") or other code editor of your choice.
 - Install node.js (v8.10+) https://nodejs.org/en/
 - Install AWS CLI https://aws.amazon.com/cli/
-- Install Azure CLI (npm install -g serverless-azure-functions)
+- Install Azure CLI (MacOs -> brew update && brew install azure-cli) [Windows](https://docs.microsoft.com/pl-pl/cli/azure/install-azure-cli-windows?view=azure-cli-latest)
 - Install The Serverless Framework (npm install -g serverless)
 - Install Git (https://git-scm.com/downloads)
-
 
 # Part 1 - AWS
 [Serverless on AWS](aws.md)
