@@ -1,3 +1,10 @@
+# Serverless web application architecture
+During the workshops, we will build fully serverless web application powered by AWS.
+The application will allow searching a product based on query typed in the browser. The search will be powered by a 3rd party service called Algolia. To secure our data we will use AWS Cognito as an identity provider.
+
+Final application architecture:
+![App architecture](https://raw.githubusercontent.com/Marcin-Duszynski/IntroductionToServerless-workshops/master/doc/img/ServerlessAppArchitecture.png "Final application architecture")
+
 # Step 0 - Init
 
 Login to [the AWS Console](https://signin.aws.amazon.com/oauth?redirect_uri=https%3A%2F%2Fconsole.aws.amazon.com%2Fconsole%2Fhome%3Fstate%3DhashArgs%2523%26isauthcode%3Dtrue&client_id=arn%3Aaws%3Aiam%3A%3A015428540659%3Auser%2Fhomepage&response_type=code&iam_user=true&account=kainos-gov-rd "the AWS Console") and type provided user name and password.
