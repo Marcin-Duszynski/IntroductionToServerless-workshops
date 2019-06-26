@@ -618,6 +618,25 @@ functions:
               application/json: '{ "query" : "$input.params(''query'')" }'
 ```
 
+Enable DynamoDB streams
+```
+    ItemsStore:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ItemsStore-${self:provider.stage}
+        AttributeDefinitions:
+          - AttributeName: objectID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: objectID
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        StreamSpecification:
+          StreamViewType: NEW_IMAGE
+```
+
 ## Update npm dependencies
 package.json
 ```javascript
