@@ -591,7 +591,7 @@ functions:
     memorySize: 256
     environment:
       STORE_DB_NAME: ${self:resources.Resources.ItemsStore.Properties.TableName}
-      ALGOLIA_API_KEY: ${env:ALGOLIA_API_KEY_SEARCH
+      ALGOLIA_API_KEY: ${env:ALGOLIA_API_KEY_SEARCH}
     iamRoleStatements: #This should be removed
       - Effect: Allow
         Action:
