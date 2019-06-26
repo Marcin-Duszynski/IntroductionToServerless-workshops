@@ -590,14 +590,7 @@ functions:
     handler: searchAlgolia.handler
     memorySize: 256
     environment:
-      STORE_DB_NAME: ${self:resources.Resources.ItemsStore.Properties.TableName}
-      ALGOLIA_API_KEY: ${env:ALGOLIA_API_KEY_SEARCH}
-    iamRoleStatements: #This should be removed
-      - Effect: Allow
-        Action:
-          - dynamodb:GetItem
-          - dynamodb:Scan
-        Resource: arn:aws:dynamodb:*:*:table/${self:resources.Resources.ItemsStore.Properties.TableName}
+      ALGOLIA_API_KEY: ${env:ALGOLIA_API_KEY_SEARCH
     tags:
       owner: ${self:provider.stage}
     events:
@@ -619,7 +612,7 @@ functions:
 ```
 
 Enable DynamoDB streams
-```
+```javascript
     ItemsStore:
       Type: AWS::DynamoDB::Table
       Properties:
