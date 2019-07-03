@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo Starting SLS AWS account cleanup
+
+echo Removing S3 buckets
+aws s3 ls --profile serverlessMap | cut -d" " -f 3 | xargs -I{} aws s3 rb s3://{} --force --profile serverlessMap
+
+echo Removing CloudFormation stacks
+aws cloudformation list-stacks --profile serverlessMap | jq -r '.[][].StackName' | xargs -I{} aws cloudformation delete-stack --stack-name {} --profile serverlessMap
+
+echo Cleanup finished
