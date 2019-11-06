@@ -590,7 +590,7 @@ functions:
     handler: searchAlgolia.handler
     memorySize: 256
     environment:
-      ALGOLIA_API_KEY: ${env:ALGOLIA_API_KEY_SEARCH
+      ALGOLIA_API_KEY: ${env:ALGOLIA_API_KEY_SEARCH}
     tags:
       owner: ${self:provider.stage}
     events:
