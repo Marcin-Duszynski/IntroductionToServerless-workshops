@@ -6,6 +6,8 @@ echo Removing S3 buckets
 aws s3 ls --profile serverlessMap | cut -d" " -f 3 | xargs -I{} aws s3 rb s3://{} --force --profile serverlessMap
 
 echo Removing CloudFormation stacks
-aws cloudformation list-stacks --profile serverlessMap | jq -r '.[][].StackName' | xargs -I{} aws cloudformation delete-stack --stack-name {} --profile serverlessMap
+aws cloudformation list-stacks --profile serverlessMap --region us-east-1 | jq -r '.[][].StackName' | xargs -I{} aws cloudformation delete-stack --stack-name {} --profile serverlessMap --region us-east-1
+aws cloudformation list-stacks --profile serverlessMap --region eu-west-1 | jq -r '.[][].StackName' | xargs -I{} aws cloudformation delete-stack --stack-name {} --profile serverlessMap --region eu-west-1
+aws cloudformation list-stacks --profile serverlessMap --region eu-west-2 | jq -r '.[][].StackName' | xargs -I{} aws cloudformation delete-stack --stack-name {} --profile serverlessMap --region eu-west-2
 
 echo Cleanup finished
