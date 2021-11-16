@@ -17,6 +17,6 @@
     "serverless-iam-roles-per-function": "^1.0.1",
     "serverless-aws-documentation": "^1.1.0",
     "serverless-reqvalidator-plugin": "^1.0.2",
-    "aws-sdk": "^2.276.1"
+    "aws-sdk": "^2.814.0"
   }
 }
